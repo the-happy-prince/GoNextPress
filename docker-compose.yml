@@ -28,7 +28,7 @@ services:
     ports:
       - "8000:80"
     depends_on:
-      - postgres
+      - mariadb
     networks:
       - mynet
 
