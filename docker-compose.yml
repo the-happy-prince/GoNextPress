@@ -1,18 +1,45 @@
 version: '3.9'
 
 services:
-  postgres:
-    image: postgres:latest
-    container_name: postgres_db
-    ports:
-      - "5432"
+  mariadb:
+    image: mariadb
     environment:
-      POSTGRES_DB: wordpress
-      POSTGRES_USER: prince
-      POSTGRES_PASSWORD: ecnirp
+     - MYSQL_ROOT_PASSWORD=ecnirp
+     - MYSQL_DATABASE=wordpress
     volumes:
-      - pgdata:/var/lib/postgresql/data
+     - database:/var/lib/mysql
+    networks:
+      - mynet
 
+  go:
+    image: princedevops/mycustomgoapp
+    container_name: go
+    ports:
+      - "4000:4000"
+
+  wordpress:
+    image: princedevops/mycustomwordpressapp
+    container_name: wordpress
+    environment:
+      - WORDPRESS_DB_HOST=mariadb
+      - WORDPRESS_DB_USER=root
+      - WORDPRESS_DB_PASSWORD=ecnirp
+      - WORDPRESS_DB_NAME=wordpress
+    ports:
+      - "8000:80"
+    depends_on:
+      - postgres
+    networks:
+      - mynet
+
+  nextjs:
+    image: princedevops/mycustomtsapp
+    container_name: nextjs
+    ports:
+      - "3000:3000"
 
 volumes:
   pgdata:
+
+networks:
+  mynet:
