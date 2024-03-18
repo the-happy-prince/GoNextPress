@@ -19,8 +19,14 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
 
-      - name: Build Docker image
+      - name: Build Go Docker image
         run: docker build -t docker.io/princedevops/mycustomgoapp Go/
+
+      - name: Build Nextjs Docker image
+        run: docker build -t docker.io/princedevops/mycustomtsapp NextJs/
+
+      - name: Build Wordpress Docker image
+        run: docker build -t docker.io/princedevops/mycustomwordpressapp Wordpress/
 
       - name: Login to Docker Hub
         uses: docker/login-action@v2
@@ -28,5 +34,11 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Push Docker image
+      - name: Push Go Docker image
         run: docker push docker.io/princedevops/mycustomgoapp
+
+      - name: Push Nextjs Docker image
+        run: docker push docker.io/princedevops/mycustomtsapp
+        
+      - name: Push Wordpress Docker image
+        run: docker push docker.io/princedevops/mycustomwordpressapp
