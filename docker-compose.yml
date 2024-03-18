@@ -3,6 +3,7 @@ version: '3.9'
 services:
   mariadb:
     image: mariadb
+    container_name: mariadb
     environment:
      - MYSQL_ROOT_PASSWORD=ecnirp
      - MYSQL_DATABASE=wordpress
@@ -39,7 +40,7 @@ services:
       - "3000:3000"
 
 volumes:
-  pgdata:
+  database:
 
 networks:
   mynet:
