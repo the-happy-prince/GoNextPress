@@ -16,7 +16,7 @@ services:
     image: princedevops/mycustomgoapp
     container_name: go
     ports:
-      - "4000:4000"
+      - "4000:80"
 
   wordpress:
     image: princedevops/mycustomwordpressapp
