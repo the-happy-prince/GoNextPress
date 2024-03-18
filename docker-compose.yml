@@ -1,0 +1,18 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres_db
+    ports:
+      - "5432"
+    environment:
+      POSTGRES_DB: wordpress
+      POSTGRES_USER: prince
+      POSTGRES_PASSWORD: ecnirp
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+
+volumes:
+  pgdata:
