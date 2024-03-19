@@ -38,10 +38,10 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Push Go Docker image
-        run: docker push docker.io/princedevops/mycustomgoapp
+        run: docker push ${{ vars.GO_DOCKER_IMAGE }}
 
       - name: Push Nextjs Docker image
-        run: docker push docker.io/princedevops/mycustomtsapp
+        run: docker push ${{ vars.TS_DOCKER_IMAGE }}
         
       - name: Push Wordpress Docker image
-        run: docker push docker.io/princedevops/mycustomwordpressapp
+        run: docker push ${{ vars.WORDPRESS_DOCKER_IMAGE }}
