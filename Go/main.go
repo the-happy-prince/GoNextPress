@@ -2,6 +2,7 @@ package main
 
 import (
     "fmt"
+    "log"
     "net/http"
 )
 
@@ -10,5 +11,8 @@ func main() {
         fmt.Fprintf(w, "Hello, you've requested: %s\n", r.URL.Path)
     })
 
-    http.ListenAndServe(":80", nil)
+    // Check for errors from ListenAndServe
+    if err := http.ListenAndServe(":80", nil); err != nil {
+        log.Fatalf("Error starting server: %s", err)
+    }
 }
